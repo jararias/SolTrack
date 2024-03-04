@@ -233,9 +233,10 @@ class Position(Parameters):
         self._altitude_uncorr = np.copy(alt)                       # Sun altitude, uncorrected for refraction.  If not copied, _altitude_uncorr and altitude will be converted to degrees TWICE!
         
         # Correct for atmospheric refraction:
-        dalt = 2.967e-4 / np.tan(alt + 3.1376e-3/(alt + 8.92e-2))  # Refraction correction in altitude
-        dalt *= self.pressure/101.0 * 283.0/self.temperature
-        alt += dalt
+        if self.param._with_refraction:
+            dalt = 2.967e-4 / np.tan(alt + 3.1376e-3/(alt + 8.92e-2))  # Refraction correction in altitude
+            dalt *= self.pressure/101.0 * 283.0/self.temperature
+            alt += dalt
         self.altitude = alt                                        # Sun altitude, corrected for atmospheric refraction
         
         return

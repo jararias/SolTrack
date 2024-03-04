@@ -25,20 +25,21 @@ class Parameters:
     """Class containing SolTrack parameters/settings."""
     
     _use_degrees:              bool  = False;   """Input (geographic position) and output are in degrees."""
+    _with_refraction           bool  = True     # jararias, 4 Mar 24
     _use_north_equals_zero:    bool  = False;   """Azimuth: 0 = South, pi/2 (90deg) = West  ->  0 = North, pi/2 (90deg) = East."""
     _compute_refr_equatorial:  bool  = True;    """Compute refraction-corrected equatorial coordinates (Hour angle, declination)."""
     _compute_distance:         bool  = True;    """Compute the distance to the Sun."""
     
     
-    def setParameters(self, use_degrees=None, use_north_equals_zero=None, compute_refr_equatorial=None,
+    def setParameters(self, use_degrees=None, with_refraction=True, use_north_equals_zero=None, compute_refr_equatorial=None,
                       compute_distance=None):
         """This function is obsolescent and will be removed in a future version.  Use set_parameters()
         instead."""
         _warn_obsolescent('setParameters', 'set_parameters', rename=True)
-        return self.set_parameters(use_degrees, use_north_equals_zero, compute_refr_equatorial, compute_distance)
+        return self.set_parameters(use_degrees, with_refraction, use_north_equals_zero, compute_refr_equatorial, compute_distance)
     
         
-    def set_parameters(self, use_degrees=None, use_north_equals_zero=None, compute_refr_equatorial=None,
+    def set_parameters(self, use_degrees=None, with_refraction=True, use_north_equals_zero=None, compute_refr_equatorial=None,
                        compute_distance=None):
         """Set the SolTrack parameters (settings).
         
@@ -50,6 +51,7 @@ class Parameters:
         """
         
         if use_degrees is not None:              self._use_degrees              = use_degrees
+        self._with_refraction = with_refraction  # jararias, 4 Mar 24
         if use_north_equals_zero is not None:    self._use_north_equals_zero    = use_north_equals_zero
         if compute_refr_equatorial is not None:  self._compute_refr_equatorial  = compute_refr_equatorial
         if compute_distance is not None:         self._compute_distance         = compute_distance

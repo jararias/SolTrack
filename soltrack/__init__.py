@@ -41,7 +41,7 @@ from .riseset   import RiseSet
 class SolTrack(Location, Time, Position, RiseSet):
     
     
-    def __init__(self, geo_longitude,geo_latitude, use_degrees=None, use_north_equals_zero=None, compute_refr_equatorial=None, compute_distance=None):
+    def __init__(self, geo_longitude,geo_latitude, use_degrees=None, with_refraction=True, use_north_equals_zero=None, compute_refr_equatorial=None, compute_distance=None):
         
         """Construct a SolTrack object with specified geographical location and parameters (settings).
         
@@ -50,6 +50,7 @@ class SolTrack(Location, Time, Position, RiseSet):
           geo_latitude (float):            Geographical latitude of the observer or installation (radians or degrees, depending on use_degrees).
         
           use_degrees (bool):              Input (geographic position) and output are in degrees, rather than radians.
+          with_refraction (bool):          Account for atmospheric refraction.
           use_north_equals_zero (bool):    Azimuth: 0 = South, pi/2 (90deg) = West  ->  0 = North, pi/2 (90deg) = East.
           compute_refr_equatorial (bool):  Compute refraction-corrected equatorial coordinates (Hour angle, declination).
           compute_distance (bool):         Compute the distance to the Sun.
@@ -60,7 +61,7 @@ class SolTrack(Location, Time, Position, RiseSet):
         
         # Create Parameters objects:
         self.param     = Parameters()
-        self.param.set_parameters(use_degrees, use_north_equals_zero, compute_refr_equatorial, compute_distance)
+        self.param.set_parameters(use_degrees, with_refraction, use_north_equals_zero, compute_refr_equatorial, compute_distance)
         
         # Use composition to obtain the attributes from Location, Time, Position and RiseSet:
         Location.__init__(self, geo_longitude, geo_latitude)  # Set the geographic location
