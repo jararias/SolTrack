@@ -25,7 +25,7 @@ class Parameters:
     """Class containing SolTrack parameters/settings."""
     
     _use_degrees:              bool  = False;   """Input (geographic position) and output are in degrees."""
-    _with_refraction           bool  = True     # jararias, 4 Mar 24
+    _with_refraction:          bool  = True;     # jararias, 4 Mar 24
     _use_north_equals_zero:    bool  = False;   """Azimuth: 0 = South, pi/2 (90deg) = West  ->  0 = North, pi/2 (90deg) = East."""
     _compute_refr_equatorial:  bool  = True;    """Compute refraction-corrected equatorial coordinates (Hour angle, declination)."""
     _compute_distance:         bool  = True;    """Compute the distance to the Sun."""
